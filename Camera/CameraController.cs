@@ -22,9 +22,11 @@ public class CameraController : MonoBehaviour {
         //Zoom the camera in or out on the player
         currentZoom -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
+        //Debug.Log(currentZoom);
 
         //Rotate the camera around the player
         currentYaw -= Input.GetAxis("Horizontal") * yawSpeed * Time.deltaTime;
+        //Debug.Log(currentYaw);
     }
 
     void LateUpdate() {
