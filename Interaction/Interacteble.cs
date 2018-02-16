@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Interacteble : MonoBehaviour {
 
@@ -38,6 +37,9 @@ public class Interacteble : MonoBehaviour {
     }
 
     void OnDrawGizmosSelected() {
+        if (interactionTransform == null) {
+            interactionTransform = transform;
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(interactionTransform.position, radius);
     }
