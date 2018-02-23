@@ -6,9 +6,11 @@ using UnityEngine;
 public class Equipment : Item {
 
     public EquipmentSlot equipSlot;
+    public SkinnedMeshRenderer mesh;
+    public EquipmentMeshRegion[] coveredMeshRegions;
 
-    public int armorModifier;
-    public int damageModifier;
+    public int armorModifier;  //Increas/decreas in armor
+    public int damageModifier; //Increas/decreas in damage
 
     public override void Use() {
         base.Use();
@@ -20,3 +22,4 @@ public class Equipment : Item {
 }
 
 public enum EquipmentSlot {Head, Chest, Legs, Feet, Weapon, Shield}
+public enum EquipmentMeshRegion {Legs, Arms, Torso }
