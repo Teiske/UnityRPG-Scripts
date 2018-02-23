@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
@@ -10,36 +11,32 @@ public class PlayerController : MonoBehaviour {
     Camera cam;
     PlayerMotor motor;
 
-	// Use this for initialization
-	void Start () {
+	void Start() {
         cam = Camera.main;
         motor = GetComponent<PlayerMotor>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+	void Update() {
+        if (EventSystem.current.IsPointerOverGameObject()) {
+            return;
+        }
         if (Input.GetMouseButton(0)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100, movementMask)) {
-                Debug.Log("We Hit " + hit.collider.name + " " + hit.point);
-
+               // Debug.Log("We Hit " + hit.collider.name + " " + hit.point);
                 //Move our player to what we hit
                 motor.MoveToPoint(hit.point);
-
                 //Stop focusing any objects
                 RemoveFocus();
-
             }
         }
-
         if (Input.GetMouseButton(1)) {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
             if (Physics.Raycast(ray, out hit, 100)) {
-                Debug.Log("We Hit " + hit.collider.name + " " + hit.point);
+                //Debug.Log("We Hit " + hit.collider.name + " " + hit.point);
                 //Check if we hit an interactble
                 Interacteble interacteble = hit.collider.GetComponent<Interacteble>();
                 //If we did, set it as our focus
